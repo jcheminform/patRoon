@@ -74,6 +74,12 @@ setGeneric("makeHCluster", function(obj, method = "complete", ...) standardGener
 
 setGeneric("plotHeatMap", function(obj, ...) standardGeneric("plotHeatMap"))
 
+### TP prediction
+
+setGeneric("suspects", function(pred) standardGeneric("suspects"))
+setGeneric("predictions", function(pred) standardGeneric("predictions"))
+setGeneric("convertToMFDB", function(pred, out) standardGeneric("convertToMFDB"))
+
 ### suspect screening
 
 #' Target and suspect screening
