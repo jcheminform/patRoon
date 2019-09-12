@@ -78,8 +78,8 @@ setGeneric("plotHeatMap", function(obj, ...) standardGeneric("plotHeatMap"))
 
 setGeneric("suspects", function(pred) standardGeneric("suspects"))
 setGeneric("predictions", function(pred) standardGeneric("predictions"))
-setGeneric("convertToMFDB", function(pred, out) standardGeneric("convertToMFDB"))
-setGeneric("convertToSuspects", function(pred, adduct, tidy = TRUE) standardGeneric("convertToSuspects"))
+setGeneric("convertToMFDB", function(pred, out, includePrec = TRUE) standardGeneric("convertToMFDB"))
+setGeneric("convertToSuspects", function(pred, adduct, includePrec = TRUE, tidy = TRUE) standardGeneric("convertToSuspects"))
 
 ### suspect screening
 
