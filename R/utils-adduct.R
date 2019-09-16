@@ -254,7 +254,7 @@ as.adduct <- function(x, format = "generic", isPositive = NULL)
 #' @export
 calculateIonFormula <- function(formula, adduct)
 {
-    checkmate::assertCharacter(formula, min.chars = 1)
+    checkmate::assertCharacter(formula)
     adduct <- checkAndToAdduct(adduct)
 
     sapply(formula, function(f)
