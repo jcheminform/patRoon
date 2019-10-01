@@ -297,3 +297,13 @@ isolatePrecInMSPeakList <- function(plist, isolatePrec, negate)
 
     return(plist)
 }
+
+getSpec <- function(MSPeakLists, groupName, MSLevel, analysis)
+{
+    MSInd <- if (MSLevel == 1) "MS" else "MSMS"
+    if (!is.null(analysis))
+        spec <- MSPeakLists[[analysis, groupName]][[MSInd]]
+    else
+        spec <- MSPeakLists[[groupName]][[MSInd]]
+    return(spec)
+}

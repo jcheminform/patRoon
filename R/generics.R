@@ -44,6 +44,10 @@ setGeneric("getXCMSnExp", function(obj, verbose = TRUE) standardGeneric("getXCMS
 setGeneric("peakLists", function(obj) standardGeneric("peakLists"))
 setGeneric("averagedPeakLists", function(obj) standardGeneric("averagedPeakLists"))
 setGeneric("generateMSPeakLists", function(fGroups, algorithm, ...) standardGeneric("generateMSPeakLists"))
+setGeneric("spectrumSimilarity", function(obj, groupName1, groupName2,
+                                          analysis1 = NULL, analysis2 = NULL,
+                                          MSLevel = 1, doPlot = TRUE, absMzDev = 0.005,
+                                          relIntThr = 10, ...) standardGeneric("spectrumSimilarity"))
 
 ### Components
 
