@@ -457,6 +457,7 @@ setMethod("plotSpec", "MSPeakLists", function(obj, groupName, analysis = NULL, M
 
     if (is.null(title))
     {
+        MSInd <- if (MSLevel == 1) "MS" else "MSMS"
         if (!is.null(analysis))
             title <- sprintf("%s (%s) %s", groupName, analysis, MSInd)
         else
