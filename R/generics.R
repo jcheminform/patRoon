@@ -46,8 +46,9 @@ setGeneric("averagedPeakLists", function(obj) standardGeneric("averagedPeakLists
 setGeneric("generateMSPeakLists", function(fGroups, algorithm, ...) standardGeneric("generateMSPeakLists"))
 setGeneric("spectrumSimilarity", function(obj, groupName1, groupName2,
                                           analysis1 = NULL, analysis2 = NULL,
-                                          MSLevel = 1, doPlot = TRUE, absMzDev = 0.005,
-                                          relIntThr = 10, ...) standardGeneric("spectrumSimilarity"))
+                                          MSLevel = 1, doPlot = TRUE, absMzDev = 0.002,
+                                          relMinIntensity = 10, omitPrecursor = FALSE,
+                                          mzShift = 0, xlim = NULL, ylim = c(0, 100), ...) standardGeneric("spectrumSimilarity"))
 
 ### Components
 
