@@ -17,6 +17,7 @@
 \alias{groupNames}
 \alias{plotChord}
 \alias{plotEIC}
+\alias{plotGraph}
 \alias{plotInt}
 \alias{plotScores}
 \alias{plotSilhouettes}
@@ -69,6 +70,8 @@ plotChord(obj, addSelfLinks = FALSE, addRetMzPlots = TRUE, ...)
 
 plotEIC(obj, ...)
 
+plotGraph(obj, onlyLinked = TRUE)
+
 plotInt(obj, ...)
 
 plotScores(obj, ...)
@@ -109,6 +112,8 @@ retention time scatter plots.}
 
 \item{kSeq}{An integer vector containing the sequence that should be used for
 average silhouette width calculation.}
+
+\item{onlyLinked}{Only plots linked objects if \code{TRUE}.}
 
 \item{k, h}{Desired numbers of clusters. See \code{\link{cutree}}.}
 
@@ -179,7 +184,7 @@ please refer to the linked method documentation for each generic.
 \code{filter} provides various functionality to do post-filtering of data.
 
 \itemize{
-    \item Methods are defined for: \code{\link[=filter,components-method]{components}}; \code{\link[=filter,compounds-method]{compounds}}; \code{\link[=filter,featureGroups-method]{featureGroups}}; \code{\link[=filter,features-method]{features}}; \code{\link[=filter,featuresXCMS-method]{featuresXCMS}}; \code{\link[=filter,featuresXCMS3-method]{featuresXCMS3}}; \code{\link[=filter,formulas-method]{formulas}}; \code{\link[=filter,MSPeakLists-method]{MSPeakLists}}.
+    \item Methods are defined for: \code{\link[=filter,components-method]{components}}; \code{\link[=filter,compounds-method]{compounds}}; \code{\link[=filter,featureGroups-method]{featureGroups}}; \code{\link[=filter,features-method]{features}}; \code{\link[=filter,featuresXCMS-method]{featuresXCMS}}; \code{\link[=filter,featuresXCMS3-method]{featuresXCMS3}}; \code{\link[=filter,formulas-method]{formulas}}; \code{\link[=filter,MSPeakLists-method]{MSPeakLists}}; \code{\link[=filter,TPPredictionsBT-method]{TPPredictionsBT}}.
 }
 
 \code{getFeatures} returns the object's \code{\link{features}} object.
@@ -210,6 +215,12 @@ please refer to the linked method documentation for each generic.
 
 \itemize{
     \item Methods are defined for: \code{\link[=plotEIC,components-method]{components}}; \code{\link[=plotEIC,featureGroups-method]{featureGroups}}.
+}
+
+\code{plotGraph} Plots an interactive network graph.
+
+\itemize{
+    \item Methods are defined for: \code{\link[=plotGraph,componentsNT-method]{componentsNT}}; \code{\link[=plotGraph,componentsTPs-method]{componentsTPs}}.
 }
 
 \code{plotInt} plots the intensity of all contained features.
@@ -298,7 +309,7 @@ please refer to the linked method documentation for each generic.
  \code{as.data.table} Converts an object to a table (\code{\link{data.table}}).
 
 \itemize{
-    \item Methods are defined for: \code{\link[=as.data.table,components-method]{components}}; \code{\link[=as.data.table,compounds-method]{compounds}}; \code{\link[=as.data.table,featureGroups-method]{featureGroups}}; \code{\link[=as.data.table,features-method]{features}}; \code{\link[=as.data.table,formulas-method]{formulas}}; \code{\link[=as.data.table,MSPeakLists-method]{MSPeakLists}}; \code{\link[=as.data.table,TPPredictions-method]{TPPredictions}}; \code{\link[=as.data.table,workflowStep-method]{workflowStep}}.
+    \item Methods are defined for: \code{\link[=as.data.table,components-method]{components}}; \code{\link[=as.data.table,componentsTPs-method]{componentsTPs}}; \code{\link[=as.data.table,compounds-method]{compounds}}; \code{\link[=as.data.table,featureGroups-method]{featureGroups}}; \code{\link[=as.data.table,features-method]{features}}; \code{\link[=as.data.table,formulas-method]{formulas}}; \code{\link[=as.data.table,MSPeakLists-method]{MSPeakLists}}; \code{\link[=as.data.table,TPPredictions-method]{TPPredictions}}; \code{\link[=as.data.table,workflowStep-method]{workflowStep}}.
 }
 
  \code{as.data.frame} Converts an object to a table (\code{data.frame}).
