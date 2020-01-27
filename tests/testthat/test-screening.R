@@ -48,7 +48,7 @@ test_that("suspect screening is OK", {
     
     expect_warning(screenSuspects(fGroups, suspsMissingRow, skipInvalid = TRUE))
     expect_error(screenSuspects(fGroups, suspsMissingRow, skipInvalid = FALSE))
-    
+
     # adduct argument
     expect_equal(screenSuspects(fGroups, susps[name %in% c("TBA", "TPA")]),
                  screenSuspects(fGroups, susps[name %in% c("TBA", "TPA"), -"adduct"], adduct = "[M]+"))
