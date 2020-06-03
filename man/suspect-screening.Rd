@@ -18,30 +18,54 @@
 \alias{featuresBrukerTASQ}
 \title{Target and suspect screening}
 \usage{
-screenSuspects(obj, suspects, rtWindow = 12, mzWindow = 0.005, adduct = NULL)
+screenSuspects(
+  obj,
+  suspects,
+  rtWindow = 12,
+  mzWindow = 0.005,
+  adduct = NULL,
+  skipInvalid = TRUE
+)
 
-\S4method{screenSuspects}{features}(obj, suspects, rtWindow = 12, mzWindow = 0.005, adduct = NULL)
+\S4method{screenSuspects}{features}(
+  obj,
+  suspects,
+  rtWindow = 12,
+  mzWindow = 0.005,
+  adduct = NULL,
+  skipInvalid = TRUE
+)
 
-\S4method{screenSuspects}{featureGroups}(obj, suspects, rtWindow = 12, mzWindow = 0.005, adduct = NULL)
+\S4method{screenSuspects}{featureGroups}(
+  obj,
+  suspects,
+  rtWindow = 12,
+  mzWindow = 0.005,
+  adduct = NULL,
+  skipInvalid = TRUE
+)
 
 \S4method{groupFeaturesScreening}{featureGroups}(fGroups, scr)
 
-importFeatureGroupsBrukerTASQ(path, analysisInfo)
+importFeatureGroupsBrukerTASQ(path, analysisInfo, clusterRTWindow = 12)
 }
 \arguments{
 \item{obj}{The object that should be screened (\emph{i.e.}
 \code{\link{features}} or \code{\link{featureGroups}}).}
 
-\item{suspects}{A \code{data.frame} that must consist a \code{"name"} column
-(the analyte name) and \emph{either} a \code{"mz"}, \code{"neutralMass"},
-\code{"SMILES"} or \code{"InChI"} column (with the ionized m/z value, the
-neutral monoisotopic mass or the SMILES/InChI character string for the
-molecule, respectively). When no \code{"mz"} is specified the adduct must
-be specified either with the \code{adduct} function argument or by an
-\code{"adduct"} column containing a \code{character} that can be converted
-with \code{as.adduct} (\emph{e.g.} \code{"[M+H]+"}).  In addition, a column
-\code{"rt"} can be included to specify the retention time (if unspecified
-no retention times are checked).}
+\item{suspects}{A \code{data.frame} that must contain a \code{"name"} column
+(the analyte name) and \emph{at least} a \code{"mz"}, \code{"neutralMass"},
+\code{"formula"}, \code{"SMILES"}, \code{"InChI"} column (with the ionized
+m/z value, the neutral monoisotopic mass or the chemical
+formula/SMILES/InChI character string for the molecule, respectively). If
+an ion mass needs to be calculated (\emph{i.e.} no valid data is available
+in the \code{mz} column) then data is tried to be used from the columns in
+the aforementioned order. Furthermore, if ion masses need to be calculated
+then the adduct must be specified either with the \code{adduct} function
+argument or by an \code{"adduct"} column containing a \code{character} that
+can be converted with \code{as.adduct} (\emph{e.g.} \code{"[M+H]+"}). In
+addition, a column \code{"rt"} can be included to specify the retention
+time (if unspecified no retention times are checked).}
 
 \item{rtWindow, mzWindow}{The retention time window (in seconds) and
 \emph{m/z} window that will be used for matching a suspect (+/- feature
@@ -51,6 +75,12 @@ data).}
 converted to it with \code{\link{as.adduct}}). Examples: \code{"[M-H]-"},
 \code{"[M+Na]+"}. Can be \code{NULL} if either a \code{"mz"} or
 \code{"adduct"} column is present in the \code{suspects} argument.}
+
+\item{skipInvalid}{If set to \code{TRUE} then suspects with invalid data
+(\emph{e.g.} missing names or other missing data) will be ignored with a
+warning. Similarly, any suspects for which mass calculation failed (when no
+\code{mz} column is present in the suspect list), for instance, due to
+invalid \code{SMILES}, will be ignored with a warning.}
 
 \item{fGroups}{The \code{\link{featureGroups}} object that should be
 transformed (and was used to obtain the screening results).}
@@ -62,6 +92,9 @@ TASQ, converted to \file{.csv} format.}
 
 \item{analysisInfo}{A table with \link[=analysis-information]{analysis
 information}.}
+
+\item{clusterRTWindow}{This retention time window (in seconds) is used to
+group hits across analyses together. See also the details section.}
 }
 \value{
 \code{screenSuspects} will return a table (a
@@ -104,9 +137,15 @@ if possible, as it can significantly reduce the load on data interpretation.
   \code{featureGroups}.
 
 \code{importFeatureGroupsBrukerTASQ} will convert screening results
-  from Bruker TASQ to a \code{\link{featureGroups}} object. Groups are made
-  based on target analyte names and individual results per analysis are used
-  to generate the features. The input for this function is obtained by
+  from Bruker TASQ to a \code{\link{featureGroups}} object. The feature
+  groups across analyses are formed based on the name of suspects and their
+  closeness in retention time. The latter is necessary because TASQ does not
+  necessarily perform checks on retention times and may therefore assign a
+  suspect to peaks with different retention times across analyses (or within
+  a single analysis). Hence, suspects with equal names are hierarchically
+  clustered on their retention times (using \pkg{\link{fastcluster}}) to form
+  the feature groups. The cut-off value for this is specified by the
+  \code{clusterRTWindow} argument. The input for this function is obtained by
   generating an Excel export of the 'global' results and subsequently
   converting the file to \file{.csv} format. Similar to
   \code{groupFeaturesScreening}, this method will return an object that is
@@ -116,15 +155,24 @@ if possible, as it can significantly reduce the load on data interpretation.
 Both \code{groupFeaturesScreening} and
   \code{importFeatureGroupsBrukerTASQ} use names from targets/suspects as
   feature group names, therefore, it is important that these are
-  file-compatible names when \link[=reporting]{reporting data}.
+  file-compatible names when \link[=reporting]{reporting data} \file{csv} or
+  \file{pdf} data.
+
+For \code{screenSuspects} in some cases you may need to install
+  \href{http://openbabel.org/wiki/Main_Page}{OpenBabel} (\emph{e.g.} when
+  only InChI data is available for mass calculation).
 
 Please note that \code{groupFeaturesScreening} method can only
   transform the \code{featureGroups} object that was used to obtain the given
   screening results.
 
-\code{importFeatureGroupsBrukerTASQ} will use dummy values for
-  retention time and \emph{m/z} values for conversion to features, since this
-  information is not available. Hence, when plotting, for instance, extracted
-  ion chromatograms (with \code{\link{plotEIC}}) the integrated
-  chromatographic peak range shown is incorrect.
+\code{importFeatureGroupsBrukerTASQ} will use estimated min/max values
+  for retention times and dummy min/max \emph{m/z} values for conversion to
+  features, since this information is not (readily) available. Hence, when
+  plotting, for instance, extracted ion chromatograms (with
+  \code{\link{plotEIC}}) the integrated chromatographic peak range shown is
+  incorrect.
+}
+\references{
+\addCitations{fastcluster}{1}
 }
