@@ -86,6 +86,11 @@ setGeneric("convertToMFDB", function(pred, out, includePrec = TRUE) standardGene
 setGeneric("convertToSuspects", function(pred, adduct, includePrec = TRUE) standardGeneric("convertToSuspects"))
 setGeneric("linkPrecursorsToFGroups", function(pred, fGroups, adduct, mzWindow) standardGeneric("linkPrecursorsToFGroups"))
 
+### Sets
+
+setGeneric("sets", function(obj) standardGeneric("sets"))
+
+
 ### suspect screening
 
 #' Target and suspect screening
@@ -224,7 +229,7 @@ setGeneric("consensus", function(obj, ...) standardGeneric("consensus"))
 #' @templateVar func featureTable
 #' @templateVar desc returns feature information.
 #' @template generics
-setGeneric("featureTable", function(obj) standardGeneric("featureTable"))
+setGeneric("featureTable", function(obj, ...) standardGeneric("featureTable"))
 
 #' @templateVar func filter
 #' @templateVar desc provides various functionality to do post-filtering of data.
