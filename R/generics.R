@@ -74,6 +74,11 @@ setGeneric("makeHCluster", function(obj, method = "complete", ...) standardGener
 
 setGeneric("plotHeatMap", function(obj, ...) standardGeneric("plotHeatMap"))
 
+### Sets
+
+setGeneric("sets", function(obj) standardGeneric("sets"))
+
+
 ### suspect screening
 
 setGeneric("screenSuspects", function(fGroups, suspects, rtWindow = 12, mzWindow = 0.005, adduct = NULL,
@@ -155,7 +160,7 @@ setGeneric("consensus", function(obj, ...) standardGeneric("consensus"))
 #' @templateVar func featureTable
 #' @templateVar desc returns feature information.
 #' @template generics
-setGeneric("featureTable", function(obj) standardGeneric("featureTable"))
+setGeneric("featureTable", function(obj, ...) standardGeneric("featureTable"))
 
 #' @templateVar func filter
 #' @templateVar desc provides various functionality to do post-filtering of data.
