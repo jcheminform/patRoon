@@ -1,3 +1,8 @@
+# patRoon 1.2
+
+* **IMPORTANT**: the `precursor` argument to the `plotSpec()`, `annotatedSpectrum()` and `plotScores()` methods for `formulas` now expects the neutral formula instead of the ionized formula. This change was necessary to select precursors for sets with different polarities. This is also in general more consistent with compound annotations.
+
+
 # patRoon 1.0.3
 * `componentsNT`: include algorithm data returned by `nontarget::homol.search` in `homol` slot (suggested by Vittorio Albergamo)
 * several `convertMSFiles()` fixes (issue #14)
