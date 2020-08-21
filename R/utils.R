@@ -519,6 +519,15 @@ openProgBar <- function(min = 0, max, style = 3, ...)
 
 verboseCall <- function(f, a, v) if (v) do.call(f, a) else suppressMessages(invisible(do.call(f, a)))
 
+makeSetAlgorithm <- function(setObjects)
+{
+    if (length(setObjects) == 0)
+        setAlgo <- "empty"
+    else
+        setAlgo <- paste0(unique(sapply(setObjects, algorithm)), collapse = ",")
+    return(paste(setAlgo, "set", sep = "-"))
+}
+
 assertAndGetMSPLSetsArgs <- function(fGroupsSet, MSPeakListsSet)
 {
     checkmate::assertClass(MSPeakListsSet, "MSPeakListsSet")
@@ -529,3 +538,4 @@ assertAndGetMSPLSetsArgs <- function(fGroupsSet, MSPeakListsSet)
     ionizedMSPeaksList <- lapply(sets(MSPeakListsSet), ionize, obj = MSPeakListsSet)
     return(lapply(ionizedMSPeaksList, function(x) list(MSPeakLists = x)))
 }
+
