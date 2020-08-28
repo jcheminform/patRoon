@@ -65,6 +65,7 @@
 ## docs
 - improve instructions for MF and SIRIUS installation?
 - improve docs for areas (only affects when features=FALSE) and average (different behavior when features=TRUE/FALSE) for as.data.table() of featureGroups
+- update/check version nr mentioned in filter() for MSPeakLists
 
 
 ## sets
