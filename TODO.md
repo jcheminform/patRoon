@@ -115,6 +115,7 @@
     - allow input of new spectral similarity clustered components/predictions class
     - include precursor_formula in compInfo
     - include diff formula and reaction in components
+    - use new similarity functions and use all three binning methods
 - predictTPsBioTransformer()
     - allow usage of compoundsSet (if not already working)
     - allow fGroupsScreening for input
@@ -132,7 +133,6 @@
         - componentsMSMS --> predictTPsMSMS(fGroupsParent, fGroupsTP) --> TPPredictionsMSMS --> componentsTPs
     - componentsSpecClust
         - sets
-        - more properties?
 - subsetting/componentization based on log2fc
     - componentization approach
         - specify 'categories' (better name?): pairs of before/after rGroups
@@ -168,6 +168,7 @@
     - consistent naming: spec vs peaklist
     - show method for new components classes
 - Include BT in installation script and verifyDependencies()
+- fix: reportHTML: susp table, components, 
 
 
 ## features
