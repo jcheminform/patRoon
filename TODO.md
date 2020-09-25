@@ -163,6 +163,7 @@
     - update MSPeakLists method and/or export new functions?
     - auto select pearson/spearman?
     - remove OrgMassSpecR dependency
+    - consistent naming: spec vs peaklist
 - Include BT in installation script and verifyDependencies()
 
 
