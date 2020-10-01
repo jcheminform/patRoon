@@ -103,6 +103,8 @@
     - consensus?
     - support recursive screening? or throw error otherwise
 - fix empty MS(MS) peaklists if unavailable during merging sets
+- log2fc: median also possible?
+- plotVolcano: also take thresholds into account for plotting, move legend outside graph
 
 
 ## TPs
