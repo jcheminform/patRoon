@@ -172,7 +172,7 @@
 - Naming
     - More generic naming for predict etc to accommodate other sources for TPs
     - consistentency for precursor/parent/suspect
-- plotVolcano: also take thresholds into account for plotting, move legend outside graph
+- plotVolcano: move legend outside graph
 
 
 ## features
