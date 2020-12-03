@@ -75,6 +75,9 @@ setMethod("getEICsForFGroups", "featureGroups", function(fGroups, rtWindow, mzWi
             fTable[[anaInfo$analysis[anai]]][ftind[[fg]][anai]][[col]]
     }
 
+    if (!is.null(topMost))
+        topMost <- min(topMost, nrow(anaInfo))
+    
     for (fg in gNames)
     {
         if (!is.null(topMost))
@@ -103,9 +106,6 @@ setMethod("getEICsForFGroups", "featureGroups", function(fGroups, rtWindow, mzWi
         doEICs[[fg]] <- anaInfo$analysis[topAnalysesInd]
         rtRanges[[fg]] <- rtr
     }
-
-    if (!is.null(topMost))
-        topMost <- min(topMost, nrow(anaInfo))
 
     cacheDB <- openCacheDBScope()
 
@@ -158,6 +158,26 @@ setMethod("getEICsForFGroups", "featureGroupsSet", function(fGroups, rtWindow, m
     names(EICs) <- unlist(lapply(EICList, names))
     EICs <- EICs[intersect(analyses(fGroups), names(EICs))] # sync order
 
+    if (!is.null(topMost))
+    {
+        # topMost is applied per set, make sure that the final result also
+        # doesn't contain >topMost results
+        
+        topMost <- min(topMost, nrow(analysisInfo(fGroups)))
+        gTable <- groups(fGroups)
+        gNames <- names(fGroups)
+        anas <- analyses(fGroups)
+        
+        for (fg in gNames)
+        {
+            oint <- order(-gTable[[fg]])
+            topAnalysesInd <- oint[seq_len(topMost)]
+            topAnalyses <- anas[topAnalysesInd]
+            # clearout any analysis results not being in topMost
+            otherAnas <- setdiff(anas, topAnalyses)
+            EICs[otherAnas] <- lapply(EICs[otherAnas], function(e) e[setdiff(names(e), fg)])
+        }
+    }
     return(EICs)
 })
 
