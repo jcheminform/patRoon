@@ -120,6 +120,8 @@
 - Fix: blank filter with multiple replicate groups (and maybe others?)
 - Check: units of plotChord() rt/mz graphs seems off
 - plotEIC(): get mzWindow from features if possible to show more representative results (eg when OpenMS mz window is very small)
+- remove features not in any group from fGroups
+
 
 ## MSPeakLists
 - isotope tagging is lost after averaging
