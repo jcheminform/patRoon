@@ -1,3 +1,8 @@
+# patRoon 1.3.0
+
+* Future multiprocessing: make sure that logs are created even when an error occurs.
+
+
 # patRoon 1.2.0
 
 This releases focuses on a significantly changed suspect screening interface, which brings several utilities to assist suspect annotation, prioritization, mixing of suspect and full NTA workflows and other general improvements.
