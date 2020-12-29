@@ -106,7 +106,8 @@ Imports:
     fs,
     yaml,
     keys,
-    backports
+    backports,
+    shinyjs
 Suggests: 
     RDCOMClient,
     metfRag,
