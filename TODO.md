@@ -82,7 +82,7 @@
 - neutralizing / ionization
     - mergeIons()
         - other name?
-        - makes sense to not choose monoisotopic mass? nor for annotation at least
+        - makes sense to not choose monoisotopic mass? not for annotation at least
 		- also method for fGroupsSets?
 			- do it per component set
 			- used to update adducts
@@ -115,6 +115,7 @@
 		- similarly: set() like method to change data, such as adduct annotations
 - NEWS
     - [..., reAverage = FALSE] and implications of filtering when setting it to TRUE
+    - Fixed Hill ordering: H wasn't alphabetical if no C is present
     - adducts
         - GenForm/MetFragAdducts()
             - now report generic format
