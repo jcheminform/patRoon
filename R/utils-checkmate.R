@@ -324,12 +324,12 @@ assertPListIsolatePrecParams <- function(x, .var.name = checkmate::vname(x), add
     assertVal(checkmate::assertCount, "maxGap", positive = TRUE)
 }
 
-assertSets <- function(obj, s, empty.ok = TRUE, add = NULL) checkmate::assertSubset(s, sets(obj), empty.ok = empty.ok, add = add)
-
-assertEqualAdducts <- function(adducts)
+assertSets <- function(obj, s, multiple, null.ok = multiple, add = NULL)
 {
-    if (!allSame(adducts))
-        stop("Selected sets must have have equal adducts")
+    if (multiple)
+        checkmate::assertSubset(s, sets(obj), empty.ok = null.ok, add = add)
+    else
+        checkmate::assertChoice(s, sets(obj), null.ok = null.ok, add = add)
 }
 
 assertMakeSetArgs <- function(objects, class, adducts, adductNullOK, labels, add = NULL)
